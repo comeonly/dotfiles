@@ -16,7 +16,7 @@ echo "setup tmux"
 echo "====================================="
 ln -s ~/dotfiles/.tmux ~/.tmux
 ln -s ~/dotfiles/.tmux.conf ~/.tmux.conf
-rm -f ~/.tmux/tmux-powerline/theme/default.sh
+rm -f ~/.tmux/tmux-powerline/themes/default.sh
 ln -s ~/dotfiles/.tmux/tmux-powerline-themes/default.sh ~/.tmux/tmux-powerline/themes/default.sh
 ~/.tmux/tmux-powerline/generate_rc.sh
 mv ~/.tmux-powerlinerc.default ~/.tmux-powerlinerc
