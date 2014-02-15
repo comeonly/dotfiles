@@ -1,0 +1,17 @@
+set background=dark
+colorscheme molokai
+set lines=40
+set columns=105
+
+set imdisable
+set guioptions-=l
+set guioptions-=L
+set guioptions-=r
+set guioptions-=R
+set transparency=9
+" if has("gui_macvim")
+"     set fuoptions=maxvert,maxhorz
+"     au GUIEnter * set fullscreen
+" endif
+
+set guifont=Sauce\ Code\ Powerline\ ExtraLight:h13,Source\ Code\ Pro\ for\ Powerline:h16

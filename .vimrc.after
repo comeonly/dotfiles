@@ -1,0 +1,159 @@
+" ==========================================
+" vim settings
+" ==========================================
+if exists('+colorcolumn')
+  set colorcolumn=80
+else
+  au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+endif
+" set guifont=Source\ Code\ Pro\ for\ Powerline\ EXtraLight:h13,DejaVu\ Sans\ Mono\ for\ Powerline:h16,Andale\ Mono\ Regular:h16,Menlo\ Regular:h15,Consolas\ Regular:h16,Courier\ New\ Regular:h18
+set ts=4 sw=4 et
+set nospell
+set hidden
+set nofoldenable
+set cursorline
+set background=dark
+colorscheme molokai
+set history=700
+set undodir=~/.vim/_undodir
+set undofile
+set nobackup
+set nowb
+set noswapfile
+
+" ==========================================
+" key mappings
+" ==========================================
+
+nnoremap <silent><Esc><Esc> :<C-u>nohlsearch<CR>
+map <C-J> <C-W>j
+map <C-K> <C-W>k
+map <C-L> <C-W>l
+map <C-H> <C-W>h
+vnoremap < <gv
+vnoremap > >gv
+nmap <leader>w :w!<cr>
+cmap w!! w !sudo tee % >/dev/null
+map zl zL
+map zh zH
+cno $q <C-\>eDeleteTillSlash()<cr>
+cnoremap <C-A> <Home>
+cnoremap <C-E> <End>
+cnoremap <C-K> <C-U>
+vnoremap <C-R> "hy:%s/<C-r>h//gc<left><left><left>
+
+" ==========================================
+" Plugins
+" ==========================================
+
+" NERDTree
+let NERDTreeShowBookmarks=1
+let NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.DS_Store', '\.hg', '\.svn', '\.bzr']
+let NERDTreeChDirMode=0
+let NERDTreeQuitOnOpen=1
+let NERDTreeMouseMode=2
+let NERDTreeShowHidden=1
+let NERDTreeKeepTreeInNewTab=1
+let g:nerdtree_tabs_open_on_gui_startup=0
+
+" CtrlP Extensions
+let g:ctrlp_extensions=['cmdline', 'menu', 'yankring']
+
+" Snip Setting the author var
+let g:snips_author='Atunori Kamori <atunori.kamori@gmail.com>'
+
+" Tabularize
+nmap <Leader>aa :Tabularize /=><CR>
+vmap <Leader>aa :Tabularize /=><CR>
+nmap <Leader>a& :Tabularize /&<CR>
+vmap <Leader>a& :Tabularize /&<CR>
+nmap <Leader>a= :Tabularize /=<CR>
+vmap <Leader>a= :Tabularize /=<CR>
+nmap <Leader>a: :Tabularize /:<CR>
+vmap <Leader>a: :Tabularize /:<CR>
+nmap <Leader>a:: :Tabularize /:\zs<CR>
+vmap <Leader>a:: :Tabularize /:\zs<CR>
+nmap <Leader>a, :Tabularize /,<CR>
+vmap <Leader>a, :Tabularize /,<CR>
+nmap <Leader>a,, :Tabularize /,\zs<CR>
+vmap <Leader>a,, :Tabularize /,\zs<CR>
+nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
+vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
+
+" NERDCommenter
+let g:NERDSpaceDelims=1
+
+" tagbar
+let g:tagbar_autoclose = 1
+
+" ==========================================
+" php
+" ==========================================
+let php_folding = 0
+let php_sql_query = 1
+let php_baselib = 1
+let php_htmlInStrings = 1
+let php_noShortTags = 1
+let php_parent_error_close = 1
+let php_parent_error_open = 1
+" Mappings to select full/inner PHP block
+nmap <silent> <expr> vaP PhpBlockSelect(1)
+nmap <silent> <expr> viP PhpBlockSelect(0)
+
+" ==========================================
+" fundtions
+" ==========================================
+func! DeleteTillSlash()
+    let g:cmd = getcmdline()
+
+    if has("win16") || has("win32")
+        let g:cmd_edited = substitute(g:cmd, "\\(.*\[\\\\]\\).*", "\\1", "")
+    else
+        let g:cmd_edited = substitute(g:cmd, "\\(.*\[/\]\\).*", "\\1", "")
+    endif
+
+    if g:cmd == g:cmd_edited
+        if has("win16") || has("win32")
+            let g:cmd_edited = substitute(g:cmd, "\\(.*\[\\\\\]\\).*\[\\\\\]", "\\1", "")
+        else
+            let g:cmd_edited = substitute(g:cmd, "\\(.*\[/\]\\).*/", "\\1", "")
+        endif
+    endif
+
+    return g:cmd_edited
+endfunc
+
+" Function to locate endpoints of a PHP block
+function! PhpBlockSelect(mode)
+	let v:hlsearch = 0
+    let motion = "v"
+    let line = getline(".")
+    let pos = col(".")-1
+    let end = col("$")-1
+
+    if a:mode == 1
+        if line[pos] == '?' && pos+1 < end && line[pos+1] == '>'
+            let motion .= "l"
+        elseif line[pos] == '>' && pos > 1 && line[pos-1] == '?'
+            " do nothing
+        else
+            let motion .= "/?>/e\<CR>"
+        endif
+        let motion .= "o"
+        if end > 0
+            let motion .= "l"
+        endif
+        let motion .= "?<\\?php\\>\<CR>"
+    else
+        if line[pos] == '?' && pos+1 < end && line[pos+1] == '>'
+            " do nothing
+        elseif line[pos] == '>' && pos > 1 && line[pos-1] == '?'
+            let motion .= "h?\\S\<CR>""
+        else
+            let motion .= "/?>/;?\\S\<CR>"
+        endif
+        let motion .= "o?<\\?php\\>\<CR>4l/\\S\<CR>"
+    endif
+
+    return motion
+endfunction

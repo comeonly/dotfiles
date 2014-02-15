@@ -1,0 +1,8 @@
+call janus#disable_plugin('narrowregion')
+call janus#disable_plugin('oomwin')
+call janus#disable_plugin('vimwiki')
+" call janus#disable_plugin('molokai')
+
+" vim-airline
+let g:airline_powerline_fonts = 1
+let g:airline_theme='tomorrow'

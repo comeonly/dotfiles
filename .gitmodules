@@ -1,0 +1,33 @@
+[submodule ".janus/ctrlp-extension"]
+	path = .janus/ctrlp-extension
+	url = https://github.com/sgur/ctrlp-extensions.vim
+[submodule ".janus/vdebug"]
+	path = .janus/vdebug
+	url = https://github.com/joonty/vdebug
+[submodule ".janus/tabular"]
+	path = .janus/tabular
+	url = https://github.com/godlygeek/tabular
+[submodule ".janus/php.vim-html-enhanced"]
+	path = .janus/php.vim-html-enhanced
+	url = https://github.com/comeonly/php.vim-html-enhanced
+[submodule ".janus/molokai"]
+	path = .janus/molokai
+	url = https://github.com/tomasr/molokai
+[submodule ".janus/vim-airline"]
+	path = .janus/vim-airline
+	url = https://github.com/bling/vim-airline
+[submodule ".janus/emmet-vim"]
+	path = .janus/emmet-vim
+	url = https://github.com/mattn/emmet-vim
+[submodule ".janus/vim-multiple-cursors"]
+	path = .janus/vim-multiple-cursors
+	url = https://github.com/terryma/vim-multiple-cursors
+[submodule ".janus/vim-expand-region"]
+	path = .janus/vim-expand-region
+	url = https://github.com/terryma/vim-expand-region
+[submodule ".janus/delimitMate"]
+	path = .janus/delimitMate
+	url = https://github.com/Raimondi/delimitMate
+[submodule ".tmux/tmux-powerline"]
+	path = .tmux/tmux-powerline
+	url = https://github.com/erikw/tmux-powerline.git
