@@ -20,6 +20,7 @@ set undofile
 set nobackup
 set nowb
 set noswapfile
+set mouse=a
 
 " ==========================================
 " key mappings
