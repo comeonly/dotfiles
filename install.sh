@@ -1,7 +1,7 @@
 echo "get comeonly's dotfiles"
 git clone https://github.com/comeonly/dotfiles ~/dotfiles
 echo "get submodeles"
-git submodule --init --recursive
+git submodule update --init --recursive
 echo "install oh-my-zsh"
 curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
 echo "setup tmux"
