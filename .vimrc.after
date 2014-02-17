@@ -8,6 +8,7 @@ else
 endif
 " set guifont=Source\ Code\ Pro\ for\ Powerline\ EXtraLight:h13,DejaVu\ Sans\ Mono\ for\ Powerline:h16,Andale\ Mono\ Regular:h16,Menlo\ Regular:h15,Consolas\ Regular:h16,Courier\ New\ Regular:h18
 set ts=4 sw=4 et
+set listchars=tab:▸\ ,extends:>,trail:.,precedes:<
 set nospell
 set hidden
 set nofoldenable
@@ -21,6 +22,15 @@ set nobackup
 set nowb
 set noswapfile
 set mouse=a
+set mousehide
+set whichwrap=b,s,h,l,<,>,[,]
+set scrolljump=5
+set scrolloff=3
+set nojoinspaces
+set splitright
+set splitbelow
+" set wildmenu
+" set wildmode=list:longest,full
 
 " ==========================================
 " key mappings
@@ -31,17 +41,17 @@ map <C-J> <C-W>j
 map <C-K> <C-W>k
 map <C-L> <C-W>l
 map <C-H> <C-W>h
-vnoremap < <gv
-vnoremap > >gv
-nmap <leader>w :w!<cr>
-cmap w!! w !sudo tee % >/dev/null
 map zl zL
 map zh zH
+vnoremap < <gv
+vnoremap > >gv
+vnoremap <C-R> "hy:%s/<C-r>h//gc<left><left><left>
+nmap <leader>w :w!<cr>
+cmap w!! w !sudo tee % >/dev/null
 cno $q <C-\>eDeleteTillSlash()<cr>
 cnoremap <C-A> <Home>
 cnoremap <C-E> <End>
 cnoremap <C-K> <C-U>
-vnoremap <C-R> "hy:%s/<C-r>h//gc<left><left><left>
 
 " ==========================================
 " Plugins
@@ -126,7 +136,7 @@ endfunc
 
 " Function to locate endpoints of a PHP block
 function! PhpBlockSelect(mode)
-	let v:hlsearch = 0
+    let v:hlsearch = 0
     let motion = "v"
     let line = getline(".")
     let pos = col(".")-1
