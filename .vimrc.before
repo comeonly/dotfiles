@@ -1,8 +1,28 @@
 call janus#disable_plugin('narrowregion')
 call janus#disable_plugin('oomwin')
 call janus#disable_plugin('vimwiki')
-" call janus#disable_plugin('molokai')
+call janus#disable_plugin('snipmate')
+call janus#disable_plugin('vim-addon-mw-utils')
+call janus#disable_plugin('tlib')
+call janus#disable_plugin('supertab')
 
 " vim-airline
 let g:airline_powerline_fonts = 1
 let g:airline_theme='tomorrow'
+
+" neocomplete
+let g:acp_enableAtStartup = 0
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#enable_auto_delimiter = 1
+let g:neocomplete#max_list = 15
+let g:neocomplete#force_overwrite_completefunc = 1
+let g:neocomplete#sources#dictionary#dictionaries = {
+    \ 'default' : '',
+    \ 'vimshell' : $HOME.'/.vimshell_hist',
+    \ 'scheme' : $HOME.'/.gosh_completions'
+    \ }
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'

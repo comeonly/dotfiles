@@ -31,3 +31,15 @@
 [submodule ".tmux/tmux-powerline"]
 	path = .tmux/tmux-powerline
 	url = https://github.com/erikw/tmux-powerline.git
+[submodule ".janus/phpcomplete"]
+	path = .janus/phpcomplete
+	url = https://github.com/shawncplus/phpcomplete.vim
+[submodule ".janus/neocomplete"]
+	path = .janus/neocomplete
+	url = https://github.com/Shougo/neocomplete.vim
+[submodule ".janus/neosnippet-snippets"]
+	path = .janus/neosnippet-snippets
+	url = https://github.com/Shougo/neosnippet-snippets
+[submodule ".janus/neosnippet"]
+	path = .janus/neosnippet
+	url = https://github.com/Shougo/neosnippet

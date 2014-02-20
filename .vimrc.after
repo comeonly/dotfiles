@@ -28,15 +28,25 @@ set scrolljump=5
 set scrolloff=3
 set nojoinspaces
 set splitright
-set splitbelow
-" set wildmenu
-" set wildmode=list:longest,full
+set wildmenu
+set wildmode=list:longest,full
+
+" ==========================================
+" omni-completion
+" ==========================================
+if has("autocmd") && exists("+omnifunc")
+    autocmd Filetype *
+                \if &omnifunc == "" |
+                \setlocal omnifunc=syntaxcomplete#Complete |
+                \endif
+endif
+au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+set completeopt=menu,preview,longest
 
 " ==========================================
 " key mappings
 " ==========================================
-
-nnoremap <silent><Esc><Esc> :<C-u>nohlsearch<CR>
+" nnoremap <silent><Esc><Esc> :<C-u>nohlsearch<CR>
 map <C-J> <C-W>j
 map <C-K> <C-W>k
 map <C-L> <C-W>l
@@ -56,7 +66,6 @@ cnoremap <C-K> <C-U>
 " ==========================================
 " Plugins
 " ==========================================
-
 " NERDTree
 let NERDTreeShowBookmarks=1
 let NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.DS_Store', '\.hg', '\.svn', '\.bzr']
@@ -97,9 +106,33 @@ let g:NERDSpaceDelims=1
 " tagbar
 let g:tagbar_autoclose = 1
 
+" neocomplete
+imap <expr><TAB> neosnippet#expandable() ?
+            \ "\<Plug>(neosnippet_expand)" : (pumvisible() ?
+            \ "\<C-n>" : (neosnippet#jumpable() ?
+            \ "\<Plug>(neosnippet_jump)" : "\<TAB>"))
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+            \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+imap <expr><S-TAB> neosnippet#expandable_or_jumpable() ?
+            \ neocomplete#undo_completion() : (pumvisible() ?
+            \ "\<C-p>" : neocomplete#undo_completion())
+smap <expr><S-TAB> neosnippet#expandable_or_jumpable() ?
+            \ neocomplete#undo_completion() : "\<C-p>"
+inoremap <expr><CR> pumvisible() ? neocomplete#close_popup() : "\<CR>"
+" Enable heavy omni completion.
+if !exists('g:neocomplete#sources#omni#input_patterns')
+    let g:neocomplete#sources#omni#input_patterns = {}
+endif
+let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+let g:neocomplete#sources#omni#input_patterns.ruby = '[^. *\t]\.\h\w*\|\h\w*::'
+
 " ==========================================
 " php
 " ==========================================
+let g:syntastic_php_phpcs_args = "--tab-width=0"
 let php_folding = 0
 let php_sql_query = 1
 let php_baselib = 1
