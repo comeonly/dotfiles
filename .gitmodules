@@ -34,15 +34,15 @@
 [submodule ".janus/phpcomplete"]
 	path = .janus/phpcomplete
 	url = https://github.com/shawncplus/phpcomplete.vim
-[submodule ".janus/neocomplete"]
-	path = .janus/neocomplete
-	url = https://github.com/Shougo/neocomplete.vim
-[submodule ".janus/neosnippet-snippets"]
-	path = .janus/neosnippet-snippets
-	url = https://github.com/Shougo/neosnippet-snippets
-[submodule ".janus/neosnippet"]
-	path = .janus/neosnippet
-	url = https://github.com/Shougo/neosnippet
 [submodule ".janus/vim-php-dictionary"]
 	path = .janus/vim-php-dictionary
 	url = git://github.com/nishigori/vim-php-dictionary.git
+[submodule ".janus/wordpress"]
+	path = .janus/wordpress
+	url = https://github.com/dsawardekar/wordpress.vim
+[submodule ".janus/open-browser"]
+	path = .janus/open-browser
+	url = https://github.com/tyru/open-browser.vim
+[submodule ".janus/php"]
+	path = .janus/php
+	url = https://github.com/StanAngeloff/php.vim

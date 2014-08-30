@@ -1,6 +1,9 @@
 call janus#disable_plugin('narrowregion')
 call janus#disable_plugin('oomwin')
 call janus#disable_plugin('vimwiki')
+" call janus#disable_plugin('snipmate')
+" call janus#disable_plugin('supertab')
+call janus#disable_plugin('watchtower')
 
 " vim-airline
 let g:airline_powerline_fonts = 1
