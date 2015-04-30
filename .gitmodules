@@ -46,3 +46,6 @@
 [submodule ".janus/php"]
 	path = .janus/php
 	url = https://github.com/StanAngeloff/php.vim
+[submodule ".janus/neocomplete"]
+	path = .janus/neocomplete
+	url = https://github.com/Shougo/neocomplete.vim

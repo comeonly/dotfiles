@@ -1,3 +1,4 @@
+#!/bin/zsh
 upgrade_oh_my_zsh
 cd ~/dotfiles
 git pull --rebase
