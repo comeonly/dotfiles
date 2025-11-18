@@ -1,0 +1,89 @@
+# Custom configuration for dotfiles
+# This file is sourced from ~/.zshrc
+
+# Preferred editor
+export EDITOR='vim'
+
+# Language environment
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
+# History settings
+HISTSIZE=10000
+SAVEHIST=10000
+setopt SHARE_HISTORY
+setopt HIST_IGNORE_ALL_DUPS
+
+# Aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+
+# Git aliases
+alias gs='git status'
+alias ga='git add'
+alias gc='git commit'
+alias gp='git push'
+alias gl='git log --oneline --graph --decorate'
+alias gd='git diff'
+
+# tmux aliases
+alias ta='tmux attach -t'
+alias tl='tmux list-sessions'
+alias tn='tmux new -s'
+
+# Laravel作業用関数
+laravel-dev() {
+    # 開発モード: 自分の所有権に変更
+    sudo chown -R izuya:izuya /var/www/admin
+    php artisan down --render="errors::503" --retry=60
+    echo "開発モードに切り替えました"
+}
+
+laravel-prod() {
+    # 本番モード: www-dataに所有権を戻す
+    sudo chown -R www-data:www-data /var/www/admin
+    sudo chmod -R 755 /var/www/admin
+    sudo chmod -R 775 /var/www/admin/storage
+    sudo chmod -R 775 /var/www/admin/bootstrap/cache
+    sudo chmod -R 775 /var/www/admin/storage/app/uploadimages
+
+    php artisan up
+    echo "本番モードに切り替えました"
+}
+
+laravel-optimize() {
+    # キャッシュクリア&最適化
+    sudo -u www-data php artisan config:clear
+    sudo -u www-data php artisan route:clear
+    sudo -u www-data php artisan view:clear
+    sudo -u www-data php artisan cache:clear
+    sudo -u www-data composer dump-autoload --optimize
+    echo "最適化完了"
+}
+
+laravel-deploy() {
+    cd /var/www/admin
+    sudo /usr/local/bin/laravel-deploy-script.sh
+}
+
+laravel-restart() {
+    # サービス再起動
+    sudo systemctl restart php8.3-fpm
+    sudo systemctl restart nginx
+    echo "サービスを再起動しました"
+}
+
+laravel-log() {
+    # ログ確認
+    tail -f /var/www/admin/storage/logs/laravel.log
+}
+
+laravel-schedule-test() {
+    # スケジュールテスト実行
+    cd /var/www/admin
+    sudo -u www-data php artisan schedule:list
+}
