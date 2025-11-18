@@ -58,7 +58,14 @@ laravel-optimize() {
 }
 
 laravel-deploy() {
-    laravel-optimize
+    # キャッシュクリア&最適化
+    php artisan config:clear
+    php artisan route:clear
+    php artisan view:clear
+    php artisan cache:clear
+    composer dump-autoload --optimize
+    echo "最適化完了"
+
     laravel-restart
     laravel-prod
 }
