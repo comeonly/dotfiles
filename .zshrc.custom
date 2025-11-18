@@ -36,6 +36,8 @@ laravel-dev() {
 }
 
 laravel-prod() {
+    php artisan up
+
     # 本番モード: www-dataに所有権を戻す
     sudo chown -R www-data:www-data /var/www/admin
     sudo chmod -R 755 /var/www/admin
@@ -43,7 +45,6 @@ laravel-prod() {
     sudo chmod -R 775 /var/www/admin/bootstrap/cache
     sudo chmod -R 775 /var/www/admin/storage/app/uploadimages
 
-    php artisan up
     echo "本番モードに切り替えました"
 }
 
