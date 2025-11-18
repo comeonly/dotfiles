@@ -59,6 +59,7 @@ laravel-optimize() {
 
 laravel-deploy() {
     laravel-optimize
+    laravel-restart
     laravel-prod
 }
 
