@@ -58,8 +58,8 @@ laravel-optimize() {
 }
 
 laravel-deploy() {
-    cd /var/www/admin
-    sudo /usr/local/bin/laravel-deploy-script.sh
+    laravel-optimize
+    laravel-prod
 }
 
 laravel-restart() {
