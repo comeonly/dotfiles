@@ -30,7 +30,7 @@ alias tn='tmux new -s'
 # Laravel作業用関数
 laravel-dev() {
     # 開発モード: 自分の所有権に変更
-    sudo chown -R izuya:izuya /var/www/admin
+    sudo chown -R izuya:izuya ./
     php artisan down --render="errors::503" --retry=60
     echo "開発モードに切り替えました"
 }
@@ -39,11 +39,11 @@ laravel-prod() {
     php artisan up
 
     # 本番モード: www-dataに所有権を戻す
-    sudo chown -R www-data:www-data /var/www/admin
-    sudo chmod -R 755 /var/www/admin
-    sudo chmod -R 775 /var/www/admin/storage
-    sudo chmod -R 775 /var/www/admin/bootstrap/cache
-    sudo chmod -R 775 /var/www/admin/storage/app/uploadimages
+    sudo chown -R www-data:www-data ./
+    sudo chmod -R 755 ./
+    sudo chmod -R 775 ./storage
+    sudo chmod -R 775 ./bootstrap/cache
+    sudo chmod -R 775 ./storage/app/uploadimages
 
     echo "本番モードに切り替えました"
 }
@@ -80,11 +80,10 @@ laravel-restart() {
 
 laravel-log() {
     # ログ確認
-    tail -f /var/www/admin/storage/logs/laravel.log
+    tail -f ./storage/logs/laravel.log
 }
 
 laravel-schedule-test() {
     # スケジュールテスト実行
-    cd /var/www/admin
     sudo -u www-data php artisan schedule:list
 }
