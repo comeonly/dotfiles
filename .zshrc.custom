@@ -67,7 +67,6 @@ laravel-deploy() {
     composer dump-autoload --optimize
     echo "最適化完了"
 
-    laravel-restart
     laravel-prod
 }
 
