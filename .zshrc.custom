@@ -43,7 +43,7 @@ laravel-prod() {
     sudo chmod -R 755 ./
     sudo chmod -R 775 ./storage
     sudo chmod -R 775 ./bootstrap/cache
-    sudo chmod -R 775 ./storage/app/uploadimages
+    [ -d ./storage/app/uploadimages ] && sudo chmod -R 775 ./storage/app/uploadimages
 
     echo "本番モードに切り替えました"
 }
