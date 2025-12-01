@@ -59,6 +59,12 @@ laravel-optimize() {
 }
 
 laravel-deploy() {
+
+    laravel-dev
+
+    git checkout -- .
+    git pull
+
     # キャッシュクリア&最適化
     php artisan config:clear
     php artisan route:clear
